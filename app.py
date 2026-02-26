@@ -28,7 +28,14 @@ import requests
 #  🔑  PASTE YOUR GROQ API KEY HERE
 #     Get free key at: https://console.groq.com
 # ─────────────────────────────────────────────
-GROQ_API_KEY = 'your-groq-api-key-here'
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+api_key = os.getenv("GROQ_API_KEY")
+
 # ─────────────────────────────────────────────
 
 GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
