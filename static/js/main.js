@@ -11,65 +11,66 @@
 /* ─────────────────────────────────────
    CROP DATASET (rule-based prediction)
 ───────────────────────────────────── */
+// ================= DATASET (realistic averages) =================
 const crops = [
-  { name:"rice",          N:120, P:25,  K:90,  temp:26, humidity:80, rainfall:220, ph:6.0 },
-  { name:"maize",         N:135, P:28,  K:105, temp:28, humidity:75, rainfall:160, ph:6.3 },
-  { name:"wheat",         N:120, P:50,  K:40,  temp:20, humidity:60, rainfall:100, ph:6.5 },
-  { name:"barley",        N:90,  P:40,  K:40,  temp:18, humidity:55, rainfall:80,  ph:6.5 },
-  { name:"sorghum",       N:100, P:40,  K:40,  temp:30, humidity:55, rainfall:90,  ph:6.2 },
-  { name:"millet",        N:80,  P:40,  K:40,  temp:29, humidity:50, rainfall:70,  ph:6.3 },
-  { name:"cotton",        N:150, P:60,  K:60,  temp:27, humidity:65, rainfall:120, ph:6.5 },
-  { name:"sugarcane",     N:250, P:115, K:115, temp:28, humidity:75, rainfall:150, ph:6.8 },
-  { name:"potato",        N:60,  P:100, K:120, temp:20, humidity:70, rainfall:110, ph:5.8 },
-  { name:"tomato",        N:180, P:120, K:150, temp:25, humidity:70, rainfall:100, ph:6.2 },
-  { name:"onion",         N:125, P:75,  K:125, temp:22, humidity:65, rainfall:90,  ph:6.3 },
-  { name:"cabbage",       N:150, P:125, K:100, temp:18, humidity:75, rainfall:110, ph:6.5 },
-  { name:"cauliflower",   N:150, P:100, K:100, temp:17, humidity:75, rainfall:100, ph:6.5 },
-  { name:"brinjal",       N:180, P:150, K:120, temp:26, humidity:70, rainfall:110, ph:6.3 },
-  { name:"okra",          N:100, P:50,  K:50,  temp:28, humidity:65, rainfall:100, ph:6.5 },
-  { name:"soybean",       N:30,  P:60,  K:40,  temp:25, humidity:65, rainfall:90,  ph:6.4 },
-  { name:"groundnut",     N:25,  P:50,  K:75,  temp:27, humidity:65, rainfall:90,  ph:6.3 },
-  { name:"lentil",        N:20,  P:40,  K:20,  temp:20, humidity:55, rainfall:70,  ph:6.5 },
-  { name:"chickpea",      N:20,  P:50,  K:40,  temp:22, humidity:50, rainfall:65,  ph:6.6 },
-  { name:"peas",          N:25,  P:75,  K:60,  temp:18, humidity:65, rainfall:80,  ph:6.5 },
-  { name:"banana",        N:620, P:310, K:620, temp:27, humidity:85, rainfall:250, ph:6.5 },
-  { name:"mango",         N:75,  P:20,  K:70,  temp:27, humidity:60, rainfall:100, ph:6.5 },
-  { name:"apple",         N:320, P:320, K:320, temp:15, humidity:65, rainfall:120, ph:6.5 },
-  { name:"grapes",        N:300, P:300, K:600, temp:25, humidity:60, rainfall:90,  ph:6.7 },
-  { name:"pomegranate",   N:500, P:425, K:975, temp:26, humidity:55, rainfall:70,  ph:6.8 },
-  { name:"coffee",        N:120, P:40,  K:120, temp:22, humidity:80, rainfall:200, ph:6.0 },
-  { name:"tea",           N:100, P:40,  K:100, temp:20, humidity:85, rainfall:250, ph:5.5 },
-  { name:"turmeric",      N:150, P:60,  K:108, temp:25, humidity:80, rainfall:200, ph:6.0 },
-  { name:"ginger",        N:38,  P:50,  K:38,  temp:24, humidity:80, rainfall:180, ph:6.0 },
-  { name:"garlic",        N:40,  P:75,  K:75,  temp:20, humidity:65, rainfall:90,  ph:6.3 },
+  { name: "rice", N: 120, P: 40, K: 40, temp: 27, humidity: 85, rainfall: 1400, ph: 6.2 },
+  { name: "maize", N: 150, P: 60, K: 40, temp: 25, humidity: 65, rainfall: 700, ph: 6.3 },
+  { name: "wheat", N: 120, P: 50, K: 40, temp: 20, humidity: 60, rainfall: 450, ph: 6.5 },
+  { name: "barley", N: 90, P: 40, K: 40, temp: 18, humidity: 55, rainfall: 400, ph: 6.5 },
+  { name: "sorghum", N: 100, P: 40, K: 40, temp: 30, humidity: 50, rainfall: 500, ph: 6.2 },
+  { name: "millet", N: 80, P: 40, K: 40, temp: 29, humidity: 45, rainfall: 350, ph: 6.3 },
+  { name: "cotton", N: 150, P: 60, K: 60, temp: 28, humidity: 65, rainfall: 700, ph: 6.5 },
+  { name: "sugarcane", N: 250, P: 115, K: 115, temp: 28, humidity: 80, rainfall: 1500, ph: 6.8 },
+  { name: "potato", N: 120, P: 100, K: 120, temp: 18, humidity: 70, rainfall: 600, ph: 5.8 },
+  { name: "tomato", N: 180, P: 120, K: 150, temp: 25, humidity: 65, rainfall: 600, ph: 6.2 },
+  { name: "onion", N: 120, P: 75, K: 125, temp: 22, humidity: 60, rainfall: 500, ph: 6.3 },
+  { name: "cabbage", N: 150, P: 125, K: 100, temp: 18, humidity: 75, rainfall: 600, ph: 6.5 },
+  { name: "cauliflower", N: 150, P: 100, K: 100, temp: 17, humidity: 75, rainfall: 600, ph: 6.5 },
+  { name: "brinjal", N: 180, P: 150, K: 120, temp: 26, humidity: 70, rainfall: 650, ph: 6.3 },
+  { name: "okra", N: 100, P: 50, K: 50, temp: 28, humidity: 65, rainfall: 600, ph: 6.5 },
+  { name: "soybean", N: 30, P: 60, K: 40, temp: 25, humidity: 65, rainfall: 650, ph: 6.4 },
+  { name: "groundnut", N: 25, P: 50, K: 75, temp: 27, humidity: 60, rainfall: 550, ph: 6.3 },
+  { name: "lentil", N: 20, P: 40, K: 20, temp: 20, humidity: 55, rainfall: 400, ph: 6.5 },
+  { name: "chickpea", N: 20, P: 50, K: 40, temp: 22, humidity: 50, rainfall: 400, ph: 6.6 },
+  { name: "peas", N: 25, P: 75, K: 60, temp: 18, humidity: 65, rainfall: 450, ph: 6.5 },
+  { name: "banana", N: 300, P: 150, K: 300, temp: 27, humidity: 85, rainfall: 2000, ph: 6.5 },
+  { name: "mango", N: 75, P: 20, K: 70, temp: 27, humidity: 60, rainfall: 800, ph: 6.5 },
+  { name: "apple", N: 200, P: 200, K: 200, temp: 15, humidity: 65, rainfall: 900, ph: 6.5 },
+  { name: "grapes", N: 300, P: 300, K: 600, temp: 25, humidity: 60, rainfall: 600, ph: 6.7 },
+  { name: "pomegranate", N: 250, P: 125, K: 250, temp: 26, humidity: 55, rainfall: 500, ph: 6.8 },
+  { name: "coffee", N: 120, P: 40, K: 120, temp: 22, humidity: 80, rainfall: 1800, ph: 6.0 },
+  { name: "tea", N: 100, P: 40, K: 100, temp: 20, humidity: 85, rainfall: 2000, ph: 5.5 },
+  { name: "turmeric", N: 150, P: 60, K: 108, temp: 25, humidity: 80, rainfall: 1500, ph: 6.0 },
+  { name: "ginger", N: 80, P: 50, K: 80, temp: 24, humidity: 80, rainfall: 1500, ph: 6.0 },
+  { name: "garlic", N: 40, P: 75, K: 75, temp: 20, humidity: 60, rainfall: 500, ph: 6.3 }
 ];
 
-const tolerance = { N:15, P:10, K:15, temp:3, humidity:10, rainfall:30, ph:0.5 };
 
+// ================= UPDATED predictCrop (same name & params) =================
 function predictCrop(N, P, K, temp, humidity, rainfall, ph) {
-  let best = null, bestScore = Infinity;
+
+  let best = null;
+  let bestScore = Infinity;
+
   crops.forEach(crop => {
-    if (
-      Math.abs(N - crop.N) <= tolerance.N &&
-      Math.abs(P - crop.P) <= tolerance.P &&
-      Math.abs(K - crop.K) <= tolerance.K &&
-      Math.abs(temp - crop.temp) <= tolerance.temp &&
-      Math.abs(humidity - crop.humidity) <= tolerance.humidity &&
-      Math.abs(rainfall - crop.rainfall) <= tolerance.rainfall &&
-      Math.abs(ph - crop.ph) <= tolerance.ph
-    ) {
-      const score =
-        Math.abs(N - crop.N) / tolerance.N +
-        Math.abs(P - crop.P) / tolerance.P +
-        Math.abs(K - crop.K) / tolerance.K +
-        Math.abs(temp - crop.temp) / tolerance.temp +
-        Math.abs(humidity - crop.humidity) / tolerance.humidity +
-        Math.abs(rainfall - crop.rainfall) / tolerance.rainfall +
-        Math.abs(ph - crop.ph) / tolerance.ph;
-      if (score < bestScore) { bestScore = score; best = crop.name; }
+
+    const score =
+      Math.abs(N - crop.N) / crop.N +
+      Math.abs(P - crop.P) / crop.P +
+      Math.abs(K - crop.K) / crop.K +
+      Math.abs(temp - crop.temp) / crop.temp +
+      Math.abs(humidity - crop.humidity) / crop.humidity +
+      Math.abs(rainfall - crop.rainfall) / crop.rainfall +
+      Math.abs(ph - crop.ph) / crop.ph;
+
+    if (score < bestScore) {
+      bestScore = score;
+      best = crop.name;
     }
+
   });
-  return best;
+
+  return best; // same return type as before
 }
 
 /* ─────────────────────────────────────
@@ -81,19 +82,19 @@ let currentClimateData = {};
 /* ─────────────────────────────────────
    DOM REFS
 ───────────────────────────────────── */
-const themeToggle  = document.getElementById('themeToggle');
-const advisorBtn   = document.getElementById('advisorBtn');
-const cropBadge    = document.getElementById('cropBadge');
-const badgeEmoji   = document.getElementById('badgeEmoji');
-const badgeName    = document.getElementById('badgeCropName');
-const emptyState   = document.getElementById('emptyState');
-const advPanel     = document.getElementById('advisoryPanel');
-const advGrid      = document.getElementById('advisoryGrid');
-const advEmoji     = document.getElementById('advEmoji');
-const advCropName  = document.getElementById('advCropName');
-const advOverview  = document.getElementById('advOverview');
-const chainBtn     = document.getElementById('chainBtn');
-const toast        = document.getElementById('toast');
+const themeToggle = document.getElementById('themeToggle');
+const advisorBtn = document.getElementById('advisorBtn');
+const cropBadge = document.getElementById('cropBadge');
+const badgeEmoji = document.getElementById('badgeEmoji');
+const badgeName = document.getElementById('badgeCropName');
+const emptyState = document.getElementById('emptyState');
+const advPanel = document.getElementById('advisoryPanel');
+const advGrid = document.getElementById('advisoryGrid');
+const advEmoji = document.getElementById('advEmoji');
+const advCropName = document.getElementById('advCropName');
+const advOverview = document.getElementById('advOverview');
+const chainBtn = document.getElementById('chainBtn');
+const toast = document.getElementById('toast');
 
 /* ─────────────────────────────────────
    TABS
@@ -151,13 +152,13 @@ function chainToYield() {
    1. ADVISORY FLOW
 ═══════════════════════════════════════════════ */
 async function runAdvisory() {
-  const N        = parseFloat(document.getElementById('N').value);
-  const P        = parseFloat(document.getElementById('P').value);
-  const K        = parseFloat(document.getElementById('K').value);
-  const temp     = parseFloat(document.getElementById('temp').value);
+  const N = parseFloat(document.getElementById('N').value);
+  const P = parseFloat(document.getElementById('P').value);
+  const K = parseFloat(document.getElementById('K').value);
+  const temp = parseFloat(document.getElementById('temp').value);
   const humidity = parseFloat(document.getElementById('humidity').value);
   const rainfall = parseFloat(document.getElementById('rainfall').value);
-  const ph       = parseFloat(document.getElementById('ph').value);
+  const ph = parseFloat(document.getElementById('ph').value);
 
   if ([N, P, K, temp, humidity, rainfall, ph].some(v => isNaN(v))) {
     showToast('⚠️ Please fill in all fields before analyzing.', 'error');
@@ -234,36 +235,53 @@ function renderAdvisory(a) {
   badgeEmoji.textContent = a.emoji || '🌱';
   advGrid.innerHTML = '';
 
-  advGrid.appendChild(makeCard({ icon:'☀️', iconClass:'icon-amber', title: a.best_season?.title || 'Best Season',
-    html:`<div class="primary-badge">${esc(a.best_season?.primary||'')}</div>
-          <p style="font-size:13px;color:var(--text-secondary);line-height:1.5;">${esc(a.best_season?.details||'')}</p>` }));
+  advGrid.appendChild(makeCard({
+    icon: '☀️', iconClass: 'icon-amber', title: a.best_season?.title || 'Best Season',
+    html: `<div class="primary-badge">${esc(a.best_season?.primary || '')}</div>
+          <p style="font-size:13px;color:var(--text-secondary);line-height:1.5;">${esc(a.best_season?.details || '')}</p>`
+  }));
 
-  advGrid.appendChild(makeCard({ icon:'📊', iconClass:'icon-green', title: a.yield_info?.title || 'Expected Yield',
-    html:`<div class="yield-stats">
-            <div class="yield-stat"><div class="yield-stat-label">Avg. Yield</div><div class="yield-stat-value">${esc(a.yield_info?.average||'N/A')}</div></div>
-            <div class="yield-stat"><div class="yield-stat-label">Market Value</div><div class="yield-stat-value">${esc(a.yield_info?.market||'N/A')}</div></div>
+  advGrid.appendChild(makeCard({
+    icon: '📊', iconClass: 'icon-green', title: a.yield_info?.title || 'Expected Yield',
+    html: `<div class="yield-stats">
+            <div class="yield-stat"><div class="yield-stat-label">Avg. Yield</div><div class="yield-stat-value">${esc(a.yield_info?.average || 'N/A')}</div></div>
+            <div class="yield-stat"><div class="yield-stat-label">Market Value</div><div class="yield-stat-value">${esc(a.yield_info?.market || 'N/A')}</div></div>
           </div>` }));
 
-  advGrid.appendChild(makeCard({ icon:'🧪', iconClass:'icon-teal', title: a.fertilizers?.title || 'Best Fertilizers',
-    html:`<div class="primary-badge">${esc(a.fertilizers?.primary||'')}</div>${makeList(a.fertilizers?.list||[], 'var(--teal)')}` }));
+  advGrid.appendChild(makeCard({
+    icon: '🧪', iconClass: 'icon-teal', title: a.fertilizers?.title || 'Best Fertilizers',
+    html: `<div class="primary-badge">${esc(a.fertilizers?.primary || '')}</div>${makeList(a.fertilizers?.list || [], 'var(--teal)')}`
+  }));
 
-  advGrid.appendChild(makeCard({ icon:'🐛', iconClass:'icon-red', title: a.insecticides?.title || 'Pest & Disease Control',
-    html:`<div class="primary-badge">${esc(a.insecticides?.primary||'')}</div>${makeList(a.insecticides?.list||[], 'var(--red)')}` }));
+  advGrid.appendChild(makeCard({
+    icon: '🐛', iconClass: 'icon-red', title: a.insecticides?.title || 'Pest & Disease Control',
+    html: `<div class="primary-badge">${esc(a.insecticides?.primary || '')}</div>${makeList(a.insecticides?.list || [], 'var(--red)')}`
+  }));
 
-  advGrid.appendChild(makeCard({ icon:'🌡️', iconClass:'icon-blue', title: a.conditions?.title || 'Ideal Conditions',
-    html:`<div class="conditions-grid">${buildConditions(a.conditions)}</div>` }));
+  advGrid.appendChild(makeCard({
+    icon: '🌡️', iconClass: 'icon-blue', title: a.conditions?.title || 'Ideal Conditions',
+    html: `<div class="conditions-grid">${buildConditions(a.conditions)}</div>`
+  }));
 
-  advGrid.appendChild(makeCard({ icon:'🚜', iconClass:'icon-orange', title: a.techniques?.title || 'Best Farming Techniques',
-    html: makeList(a.techniques?.list||[], 'var(--amber)') }));
+  advGrid.appendChild(makeCard({
+    icon: '🚜', iconClass: 'icon-orange', title: a.techniques?.title || 'Best Farming Techniques',
+    html: makeList(a.techniques?.list || [], 'var(--amber)')
+  }));
 
-  advGrid.appendChild(makeCard({ icon:'⚠️', iconClass:'icon-amber', title: a.precautions?.title || 'Key Precautions',
-    html: makeList(a.precautions?.list||[], 'var(--amber)') }));
+  advGrid.appendChild(makeCard({
+    icon: '⚠️', iconClass: 'icon-amber', title: a.precautions?.title || 'Key Precautions',
+    html: makeList(a.precautions?.list || [], 'var(--amber)')
+  }));
 
-  advGrid.appendChild(makeCard({ icon:'💡', iconClass:'icon-purple', title: a.care_tips?.title || 'Care & Pro Tips',
-    html: makeList(a.care_tips?.list||[], 'var(--purple)') }));
+  advGrid.appendChild(makeCard({
+    icon: '💡', iconClass: 'icon-purple', title: a.care_tips?.title || 'Care & Pro Tips',
+    html: makeList(a.care_tips?.list || [], 'var(--purple)')
+  }));
 
-  advGrid.appendChild(makeCard({ icon:'📅', iconClass:'icon-green', title: a.timeline?.title || 'Crop Timeline',
-    fullWidth: true, html: buildTimeline(a.timeline?.phases||[]) }));
+  advGrid.appendChild(makeCard({
+    icon: '📅', iconClass: 'icon-green', title: a.timeline?.title || 'Crop Timeline',
+    fullWidth: true, html: buildTimeline(a.timeline?.phases || [])
+  }));
 
   advPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -272,12 +290,12 @@ function renderAdvisory(a) {
    2. YIELD PREDICTION FLOW
 ═══════════════════════════════════════════════ */
 async function runYieldPrediction() {
-  const Year       = document.getElementById('yYear').value.trim();
-  const rainfall   = document.getElementById('yRainfall').value.trim();
+  const Year = document.getElementById('yYear').value.trim();
+  const rainfall = document.getElementById('yRainfall').value.trim();
   const pesticides = document.getElementById('yPesticides').value.trim();
-  const temp       = document.getElementById('yTemp').value.trim();
-  const area       = document.getElementById('yArea').value.trim();
-  const item       = document.getElementById('yItem').value.trim();
+  const temp = document.getElementById('yTemp').value.trim();
+  const area = document.getElementById('yArea').value.trim();
+  const item = document.getElementById('yItem').value.trim();
 
   // Hide previous results
   document.getElementById('yieldResult').style.display = 'none';
@@ -308,8 +326,8 @@ async function runYieldPrediction() {
     }
 
     // Show result
-    document.getElementById('yieldKg').textContent  = data.predicted_yield_kg.toLocaleString() + ' kg';
-    document.getElementById('yieldHg').textContent  = data.predicted_yield_hg.toLocaleString();
+    document.getElementById('yieldKg').textContent = data.predicted_yield_kg.toLocaleString() + ' kg';
+    document.getElementById('yieldHg').textContent = data.predicted_yield_hg.toLocaleString();
     document.getElementById('yieldCropDisplay').textContent = data.matched_item;
     document.getElementById('yieldAreaDisplay').textContent = data.matched_area;
     document.getElementById('yieldResult').style.display = 'block';
@@ -347,10 +365,10 @@ function makeList(items, borderColor = 'var(--green-500)') {
 function buildConditions(cond) {
   if (!cond) return '';
   return [
-    { label:'🪨 Soil',     value: cond.soil },
-    { label:'💧 Water',    value: cond.water },
-    { label:'☀️ Sunlight', value: cond.sunlight },
-    { label:'📏 Spacing',  value: cond.spacing },
+    { label: '🪨 Soil', value: cond.soil },
+    { label: '💧 Water', value: cond.water },
+    { label: '☀️ Sunlight', value: cond.sunlight },
+    { label: '📏 Spacing', value: cond.spacing },
   ].map(f => `
     <div class="condition-item">
       <div class="condition-label">${f.label}</div>
@@ -403,5 +421,5 @@ function showToast(msg, type = '') {
 function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
 function esc(s) {
   if (s == null) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
